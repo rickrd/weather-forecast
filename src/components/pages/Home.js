@@ -35,6 +35,7 @@ const showError = error => {
 const HomeWrapper = styled.div`
   max-width: 1280px;
   margin: 0 auto;
+  padding: 100px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
