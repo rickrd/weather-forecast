@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import SearchCoordinate from '../molecules/SearchCoordinate'
+import SearchCoordinate from './SearchCoordinate'
 
 const BodyWrapper = styled.div`
   display: flex;
