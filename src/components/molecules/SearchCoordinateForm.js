@@ -8,11 +8,18 @@ const SearchCoordinateFormWrapper = styled.div`
   justify-content: center;
 `
 
+const handleSearchCoordinate = e => {
+  e.preventDefault()
+  console.log(e.target)
+}
+
 const SearchCoordinateForm = () => {
   return (
     <SearchCoordinateFormWrapper>
-      <input></input>
-      <button>Sent</button>
+      <form onSubmit={handleSearchCoordinate}>
+        <input></input>
+        <button>Sent</button>
+      </form>
     </SearchCoordinateFormWrapper>
   )
 }
