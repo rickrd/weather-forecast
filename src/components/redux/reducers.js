@@ -15,6 +15,8 @@ const coordinates = (state = initialState, action) => {
       return Object.assign({}, state, {
         lon: action.lon
       })
+    default:
+      return state
   }
 }
 
