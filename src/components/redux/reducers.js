@@ -1,10 +1,11 @@
-import { UPDATE_COORDINATES } from './actions'
+import { UPDATE_COORDINATES, UPDATE_DATA } from './actions'
 
 const initialState = {
   coordinates: {
     lat: 0,
     lon: 0
-  }
+  },
+  data: {}
 }
 
 const coordinates = (state = initialState, action) => {
@@ -16,6 +17,12 @@ const coordinates = (state = initialState, action) => {
           lon: action.lon
         }
       })
+
+    case UPDATE_DATA:
+      return Object.assign({}, state, {
+        data: action.data
+      })
+
     default:
       return state
   }
