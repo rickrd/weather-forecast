@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import doRequest from '../../services/request'
 import { updateCurrentData } from '../redux/actions'
+import CurrentWeather from './CurrentWeather'
 
 const WeatherInformationWrapper = styled.div`
   display: flex;
@@ -23,13 +24,16 @@ const getCurrentData = async props => {
 
 const WeatherInformation = props => {
   const { data } = props.currentData
-  
+
   if (Object.keys(data).length === 0) {
     getCurrentData(props)
   }
+  console.log(data)
 
   return Object.keys(data).length !== 0 ? (
-    <WeatherInformationWrapper>{data.name}</WeatherInformationWrapper>
+    <WeatherInformationWrapper>
+      <CurrentWeather></CurrentWeather>
+    </WeatherInformationWrapper>
   ) : (
     <WeatherInformationWrapper>No results</WeatherInformationWrapper>
   )
