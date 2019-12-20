@@ -1,10 +1,5 @@
-export const UPDATE_LAT = 'UPDATE_LAT'
-export const UPDATE_LON = 'UPDATE_LON'
+export const UPDATE_COORDINATES = 'UPDATE_COORDINATES'
 
-export const updateLat = lat => {
-  return { type: UPDATE_LAT, lat }
-}
-
-export const updateLon = lon => {
-  return { type: UPDATE_LON, lon}
+export const updateCoordinates = (lat, lon) => {
+  return { type: UPDATE_COORDINATES, lat, lon }
 }
