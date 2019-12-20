@@ -26,6 +26,10 @@ const ForecastWeatherBlock = styled.div`
   }
 `
 
+const WeatherIcon = styled.div`
+  background-image: url('../../assets/${props => props.icon}.png');
+`
+
 const ForecastWeather = props => {
   const { data } = props.forecastData
 
@@ -34,12 +38,18 @@ const ForecastWeather = props => {
   }
 
   return data.list.map(forecast => (
-    <ForecastWeatherBlock>
+    <ForecastWeatherBlock key={forecast.dt}>
+      <div id="date">
+        <div>{forecast.dt_txt.split(" ")[0]}</div>
+        <div>{forecast.dt_txt.split(" ")[1]}</div>
+        </div>
       <div id="current">Current: {forecast.main.temp}</div>
       <div id="max">Max: {forecast.main.temp_max}</div>
       <div id="min">Min: {forecast.main.temp_min}</div>
       <div>Humidity: {forecast.main.humidity}</div>
       <div>{forecast.weather.length ? forecast.weather[0].description : ''}</div>
+      <img src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}></img>
+      {/* <WeatherIcon icon={forecast.weather.length ? forecast.weather[0].icon : ''}></WeatherIcon> */}
     </ForecastWeatherBlock>
   ))
 }

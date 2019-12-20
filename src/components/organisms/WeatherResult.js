@@ -13,7 +13,7 @@ const WeatherResultWrapper = styled.div`
 `
 
 const WeatherResult = props => {
-  return props.coordinates.lat != 0 ? (
+  return props.coordinates.lat !== 0 ? (
     <WeatherResultWrapper>
       <WeatherInformation></WeatherInformation>
     </WeatherResultWrapper>

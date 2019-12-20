@@ -28,7 +28,7 @@ const getLocation = store => {
 const SearchCoordinate = props => {
   const { lat, lon } = props.coordinates
 
-  if (lat == 0 || lon == 0) {
+  if (lat === 0 || lon === 0) {
     getLocation(props)
   }
 
