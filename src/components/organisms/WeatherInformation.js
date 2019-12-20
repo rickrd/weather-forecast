@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import doRequest from '../../services/request'
-import { updateCurrentData } from '../redux/actions'
+import { updateCurrentData, updateForecastData } from '../redux/actions'
 import CurrentWeather from './CurrentWeather'
+import ForecastWeather from './ForecastWeather'
 
 const WeatherInformationWrapper = styled.div`
   display: flex;
@@ -23,19 +24,32 @@ const getCurrentData = async props => {
   return data
 }
 
-const WeatherInformation = props => {
-  const { data } = props.currentData
+const getForecastData = async props => {
+  const data = await doRequest(
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${props.coordinates.lat}&lon=${props.coordinates.lon}&units=metric&APPID=01460cb31eb2c443498031402b438f94`
+  )
+  props.dispatch(updateForecastData(data))
+  console.log(data)
+  return data
+}
 
-  if (Object.keys(data).length === 0) {
+const WeatherInformation = props => {
+  console.log(props)
+
+  if (Object.keys(props.currentData.data).length === 0) {
     getCurrentData(props)
   }
-  console.log(data)
 
-  return Object.keys(data).length !== 0 ? (
+  if (Object.keys(props.forecastData.data).length === 0) {
+    getForecastData(props)
+  }
+
+  return Object.keys(props.currentData.data).length !== 0 &&
+    Object.keys(props.forecastData.data).length !== 0 ? (
     <WeatherInformationWrapper>
-      <h3>Weather information for {data.name}</h3>
-
+      <h3>Weather information for {props.currentData.data.name}</h3>
       <CurrentWeather></CurrentWeather>
+      <ForecastWeather></ForecastWeather>
     </WeatherInformationWrapper>
   ) : (
     <WeatherInformationWrapper>Loading</WeatherInformationWrapper>

@@ -11,6 +11,7 @@ const CurrentWeatherBlock = styled.div`
   padding: 15px;
   background-color: #fff;
   color: #000;
+  margin-bottom: 10px;
 `
 
 const CurrentWeather = props => {
