@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 const WeatherResultWrapper = styled.div`
   display: flex;
@@ -8,9 +9,10 @@ const WeatherResultWrapper = styled.div`
   justify-content: center;
 `
 
-const WeatherResult = (coordinates = []) => {
-  return coordinates.length ? (
-    <WeatherResultWrapper></WeatherResultWrapper>
+const WeatherResult = props => {
+  console.log(props)
+  return props.coordinates.lat != 0 ? (
+    <WeatherResultWrapper>Results</WeatherResultWrapper>
   ) : (
     <WeatherResultWrapper>
       No results encountered, use your current location or give an address to show the weather
@@ -19,4 +21,10 @@ const WeatherResult = (coordinates = []) => {
   )
 }
 
-export default WeatherResult
+const mapStateToProps = state => {
+  return {
+    coordinates: state.coordinates
+  }
+}
+
+export default connect(mapStateToProps)(WeatherResult)
