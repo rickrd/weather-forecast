@@ -27,10 +27,11 @@ const getLocation = store => {
 
 const SearchCoordinate = props => {
   const { lat, lon } = props.coordinates
-  console.log(props)
+
   if (lat == 0 || lon == 0) {
     getLocation(props)
   }
+
   return (
     <SearchCoordinateWrapper>
       <h4>Search for your address coordinate:</h4>
@@ -41,7 +42,9 @@ const SearchCoordinate = props => {
 
 const mapStateToProps = state => {
   return {
-    coordinates: state.coordinates
+    coordinates: state.coordinates,
+    currentData: state.currentData,
+    forecastData: state.forecastData
   }
 }
 

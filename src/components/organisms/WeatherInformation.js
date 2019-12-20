@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import doRequest from '../../services/request'
-import { updateData } from '../redux/actions'
+import { updateCurrentData } from '../redux/actions'
 
 const WeatherInformationWrapper = styled.div`
   display: flex;
@@ -11,21 +11,23 @@ const WeatherInformationWrapper = styled.div`
   justify-content: center;
 `
 
-const getData = async props => {
+const getCurrentData = async props => {
   const data = await doRequest(
     `https://api.openweathermap.org/data/2.5/weather?lat=${props.coordinates.lat}&lon=${props.coordinates.lon}&units=metric&APPID=01460cb31eb2c443498031402b438f94`
   )
-  console.log(props)
-  props.dispatch(updateData(data))
+
+  props.dispatch(updateCurrentData(data))
+
   return data
 }
 
 const WeatherInformation = props => {
-  console.log(props)
-  const { data } = props
+  const { data } = props.currentData
+  
   if (Object.keys(data).length === 0) {
-    getData(props)
+    getCurrentData(props)
   }
+
   return Object.keys(data).length !== 0 ? (
     <WeatherInformationWrapper>{data.name}</WeatherInformationWrapper>
   ) : (
@@ -36,7 +38,8 @@ const WeatherInformation = props => {
 const mapStateToProps = state => {
   return {
     coordinates: state.coordinates,
-    data: state.data
+    currentData: state.currentData,
+    forecastData: state.forecastData
   }
 }
 

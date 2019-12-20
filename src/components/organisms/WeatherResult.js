@@ -11,7 +11,6 @@ const WeatherResultWrapper = styled.div`
 `
 
 const WeatherResult = props => {
-  console.log(props)
   return props.coordinates.lat != 0 ? (
     <WeatherResultWrapper>
       <WeatherInformation></WeatherInformation>
