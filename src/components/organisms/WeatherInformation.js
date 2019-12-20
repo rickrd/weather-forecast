@@ -12,6 +12,10 @@ const WeatherInformationWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  >h3 {
+    border-bottom: 1px solid #fff;
+  }
 `
 
 const getCurrentData = async props => {

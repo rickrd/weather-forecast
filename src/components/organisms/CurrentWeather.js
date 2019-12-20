@@ -12,20 +12,32 @@ const CurrentWeatherBlock = styled.div`
   background-color: #fff;
   color: #000;
   margin-bottom: 10px;
+
+  #current {
+    color: blue;
+  }
+
+  #max {
+    color: red;
+  }
+
+  #min {
+    color: green;
+  }
 `
 
 const CurrentWeather = props => {
-  console.log(props)
   const { data } = props.currentData
+
   if (Object.keys(data).length === 0) {
     return null
   }
 
   return (
     <CurrentWeatherBlock>
-      <div>Current: {data.main.temp}</div>
-      <div>Max: {data.main.temp_max}</div>
-      <div>Min: {data.main.temp_min}</div>
+      <div id="current">Current: {data.main.temp}</div>
+      <div id="max">Max: {data.main.temp_max}</div>
+      <div id="min">Min: {data.main.temp_min}</div>
       <div>Humidity: {data.main.humidity}</div>
       <div>{data.weather.length ? data.weather[0].description : ''}</div>
     </CurrentWeatherBlock>
