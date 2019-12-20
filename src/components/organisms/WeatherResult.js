@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import WeatherInformation from './WeatherInformation'
 
 const WeatherResultWrapper = styled.div`
   display: flex;
@@ -12,7 +13,9 @@ const WeatherResultWrapper = styled.div`
 const WeatherResult = props => {
   console.log(props)
   return props.coordinates.lat != 0 ? (
-    <WeatherResultWrapper>Results</WeatherResultWrapper>
+    <WeatherResultWrapper>
+      <WeatherInformation></WeatherInformation>
+    </WeatherResultWrapper>
   ) : (
     <WeatherResultWrapper>
       No results encountered, use your current location or give an address to show the weather
