@@ -7,9 +7,10 @@ import CurrentWeather from './CurrentWeather'
 
 const WeatherInformationWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `
 
 const getCurrentData = async props => {
@@ -32,10 +33,12 @@ const WeatherInformation = props => {
 
   return Object.keys(data).length !== 0 ? (
     <WeatherInformationWrapper>
+      <h3>Weather information for {data.name}</h3>
+
       <CurrentWeather></CurrentWeather>
     </WeatherInformationWrapper>
   ) : (
-    <WeatherInformationWrapper>No results</WeatherInformationWrapper>
+    <WeatherInformationWrapper>Loading</WeatherInformationWrapper>
   )
 }
 

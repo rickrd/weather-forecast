@@ -8,13 +8,13 @@ const BodyWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
   color: #fff;
 `
 
 const Body = () => {
   return (
     <BodyWrapper>
-      <h3>Weather information</h3>
       <SearchCoordinate></SearchCoordinate>
       <WeatherResult></WeatherResult>
     </BodyWrapper>

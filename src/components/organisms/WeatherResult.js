@@ -8,6 +8,8 @@ const WeatherResultWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  margin-top: 50px;
 `
 
 const WeatherResult = props => {
