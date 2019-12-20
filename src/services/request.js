@@ -1,6 +1,7 @@
 const doRequest = async url => {
+  const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
   try {
-    const raw = await fetch(url, {
+    const raw = await fetch(proxyUrl+url, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
