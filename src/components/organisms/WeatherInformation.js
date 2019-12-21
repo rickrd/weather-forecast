@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import doRequest from '../../services/request'
 import { updateCurrentData, updateForecastData } from '../redux/actions'
-import CurrentWeather from './CurrentWeather'
-import ForecastWeather from './ForecastWeather'
+import CurrentWeather from '../molecules/CurrentWeather'
+import ForecastWeather from '../molecules/ForecastWeather'
 
 const WeatherInformationWrapper = styled.div`
   display: flex;
