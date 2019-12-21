@@ -38,9 +38,9 @@ const CurrentWeather = props => {
          <div id="date">
         Right now
         </div>
-      <div id="current">Current: {data.main.temp}</div>
-      <div id="max">Max: {data.main.temp_max}</div>
-      <div id="min">Min: {data.main.temp_min}</div>
+      <div id="current">Current: {data.main.temp+' °C'}</div>
+      <div id="max">Max: {data.main.temp_max+' °C'}</div>
+      <div id="min">Min: {data.main.temp_min+' °C'}</div>
       <div>Humidity: {data.main.humidity}</div>
       <div>{data.weather.length ? data.weather[0].description : ''}</div>
       <img src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="weather icon"></img>

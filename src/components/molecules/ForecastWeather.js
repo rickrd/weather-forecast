@@ -39,9 +39,9 @@ const ForecastWeather = props => {
         <div>{forecast.dt_txt.split(" ")[0]}</div>
         <div>{forecast.dt_txt.split(" ")[1]}</div>
         </div>
-      <div id="current">Current: {forecast.main.temp}</div>
-      <div id="max">Max: {forecast.main.temp_max}</div>
-      <div id="min">Min: {forecast.main.temp_min}</div>
+      <div id="current">Current: {forecast.main.temp+' °C'}</div>
+      <div id="max">Max: {forecast.main.temp_max+' °C'}</div>
+      <div id="min">Min: {forecast.main.temp_min+' °C'}</div>
       <div>Humidity: {forecast.main.humidity}</div>
       <div>{forecast.weather.length ? forecast.weather[0].description : ''}</div>
       <img src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`} alt="weather icon"></img>
