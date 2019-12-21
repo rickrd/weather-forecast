@@ -59,7 +59,6 @@ class Autocomplete extends Component {
         showSuggestions: false,
         userInput: filteredSuggestions[activeSuggestion]
       })
-      this.props.dispatch(updateAddress(filteredSuggestions[activeSuggestion]))
     } else if (e.keyCode === 38) {
       if (activeSuggestion === 0) {
         return
@@ -115,7 +114,7 @@ class Autocomplete extends Component {
 
     return (
       <Fragment>
-        <input type="text" onChange={onChange} onKeyDown={onKeyDown} value={userInput} />
+        <input onChange={onChange} onKeyDown={onKeyDown} value={userInput} />
         {suggestionsListComponent}
       </Fragment>
     )

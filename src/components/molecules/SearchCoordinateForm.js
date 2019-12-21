@@ -57,7 +57,6 @@ const SearchCoordinateForm = props => {
           suggestions={
             localStorage.getItem('addresses') ? JSON.parse(localStorage.getItem('addresses')) : []
           }
-          value={props.address.description}
         />
         <button>Sent</button>
       </form>
