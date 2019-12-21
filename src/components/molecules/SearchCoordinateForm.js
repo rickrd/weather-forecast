@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { updateAddress } from '../redux/actions'
 
 const SearchCoordinateFormWrapper = styled.div`
   display: flex;
@@ -8,20 +10,39 @@ const SearchCoordinateFormWrapper = styled.div`
   justify-content: center;
 `
 
-const handleSearchCoordinate = e => {
+const handleFormSubmit = e => {
   e.preventDefault()
-  console.log(e.target)
+  console.log(e)
 }
 
-const SearchCoordinateForm = () => {
+const handleInputChange = (e, props) => {
+  console.log(props)
+  console.log(e.target)
+  props.dispatch(updateAddress(e.target.value))
+}
+
+const SearchCoordinateForm = props => {
+  console.log(props)
   return (
     <SearchCoordinateFormWrapper>
-      <form onSubmit={handleSearchCoordinate}>
-        <input></input>
+      <form onSubmit={handleFormSubmit}>
+        <input
+        value={props.address.description}
+          onChange={e => {
+            handleInputChange(e, props)
+          }}
+        ></input>
         <button>Sent</button>
       </form>
     </SearchCoordinateFormWrapper>
   )
 }
 
-export default SearchCoordinateForm
+const mapStateToProps = state => {
+  return {
+    coordinates: state.coordinates,
+    address: state.address
+  }
+}
+
+export default connect(mapStateToProps)(SearchCoordinateForm)
