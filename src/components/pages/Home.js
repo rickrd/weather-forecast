@@ -12,6 +12,8 @@ const HomeWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  font-family: 'Roboto';
 `
 
 const Home = props => {

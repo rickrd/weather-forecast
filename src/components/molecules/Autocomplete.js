@@ -2,6 +2,25 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { updateAddress } from '../redux/actions'
+import styled from 'styled-components'
+
+const Ul = styled.ul`
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  margin: 0;
+
+  li {
+    background-color: #fff;
+    color: #000;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    border-bottom: 1px solid #999;
+    border-right: 1px solid #999;
+    border-left: 1px solid #999;
+  }
+`
 
 class Autocomplete extends Component {
   static propTypes = {
@@ -87,7 +106,7 @@ class Autocomplete extends Component {
     if (showSuggestions && userInput) {
       if (filteredSuggestions.length) {
         suggestionsListComponent = (
-          <ul className="suggestions">
+          <Ul>
             {filteredSuggestions.map((suggestion, index) => {
               let className
 
@@ -101,7 +120,7 @@ class Autocomplete extends Component {
                 </li>
               )
             })}
-          </ul>
+          </Ul>
         )
       } else {
         suggestionsListComponent = (

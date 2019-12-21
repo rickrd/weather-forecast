@@ -10,6 +10,17 @@ const SearchCoordinateFormWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      margin-top: 10px;
+    }
+  }
 `
 
 const getCoordinates = async props => {
@@ -36,13 +47,22 @@ const handleFormSubmit = (e, props) => {
 
   getCoordinates(props)
 
+  let addressFound = []
+
   const addressArray = localStorage.getItem('addresses')
     ? JSON.parse(localStorage.getItem('addresses'))
     : []
 
-  addressArray.push(props.address.description)
+  if (addressArray.length > 0) {
+    addressFound = addressArray.filter(
+      address => address.toLowerCase() === props.address.description.toLowerCase()
+    )
+  }
 
-  localStorage.setItem('addresses', JSON.stringify(addressArray))
+  if (addressFound.length === 0) {
+    addressArray.push(props.address.description)
+    localStorage.setItem('addresses', JSON.stringify(addressArray))
+  }
 }
 
 const SearchCoordinateForm = props => {
@@ -58,7 +78,7 @@ const SearchCoordinateForm = props => {
             localStorage.getItem('addresses') ? JSON.parse(localStorage.getItem('addresses')) : []
           }
         />
-        <button>Sent</button>
+        <button>Send</button>
       </form>
     </SearchCoordinateFormWrapper>
   )
