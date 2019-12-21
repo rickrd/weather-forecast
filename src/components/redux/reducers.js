@@ -1,4 +1,9 @@
-import { UPDATE_COORDINATES, UPDATE_CURRENT_DATA, UPDATE_FORECAST_DATA } from './actions'
+import {
+  UPDATE_COORDINATES,
+  UPDATE_CURRENT_DATA,
+  UPDATE_FORECAST_DATA,
+  UPDATE_ADDRESS
+} from './actions'
 
 const initialState = {
   coordinates: {
@@ -10,6 +15,9 @@ const initialState = {
   },
   forecastData: {
     data: {}
+  },
+  address: {
+    description: ''
   }
 }
 
@@ -50,10 +58,23 @@ const forecastData = (state = {}, action) => {
   }
 }
 
+const address = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_ADDRESS:
+      return Object.assign({}, state, {
+        description: action.address
+      })
+
+    default:
+      return state
+  }
+}
+
 export default function reducers(state = initialState, action) {
   return {
     coordinates: coordinates(state.coordinates, action),
     currentData: currentData(state.currentData, action),
-    forecastData: forecastData(state.forecastData, action)
+    forecastData: forecastData(state.forecastData, action),
+    address: address(state.address, action)
   }
 }
