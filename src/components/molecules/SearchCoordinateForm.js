@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { updateCoordinates, updateCurrentData, updateForecastData } from '../redux/actions'
 import doRequest from '../../services/request'
-import Autocomplete from './Autocomplete'
+import Autocomplete from '../organisms/Autocomplete'
 
 const SearchCoordinateFormWrapper = styled.div`
   display: flex;
