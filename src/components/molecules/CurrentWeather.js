@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const CurrentWeatherBlock = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -12,6 +12,10 @@ const CurrentWeatherBlock = styled.div`
   background-color: #fff;
   color: #000;
   margin-bottom: 10px;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
 
   #current {
     color: blue;

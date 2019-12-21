@@ -9,7 +9,7 @@ const WeatherResultWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 50px;
+  margin: 20px 0;
 `
 
 const WeatherResult = props => {

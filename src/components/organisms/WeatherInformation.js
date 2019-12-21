@@ -15,6 +15,7 @@ const WeatherInformationWrapper = styled.div`
 
   > h3 {
     border-bottom: 1px solid #fff;
+    margin-top: 0;
   }
 `
 

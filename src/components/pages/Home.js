@@ -12,8 +12,12 @@ const HomeWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   font-family: 'Roboto';
+
+
+  @media (max-width: 640px) {
+    padding: 0 15px;
+  }
 `
 
 const Home = props => {

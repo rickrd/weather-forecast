@@ -19,6 +19,7 @@ const SearchCoordinateFormWrapper = styled.div`
 
     button {
       margin-top: 10px;
+      background-color: #fff;
     }
   }
 `
