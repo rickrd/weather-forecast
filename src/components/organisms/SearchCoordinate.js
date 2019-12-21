@@ -12,7 +12,7 @@ const SearchCoordinateWrapper = styled.div`
 `
 
 const showError = error => {
-  alert(error.message)
+  console.log(error.message)
 }
 
 const getLocation = store => {
