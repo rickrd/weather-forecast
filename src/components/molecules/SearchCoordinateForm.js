@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { updateAddress } from '../redux/actions'
+import { updateCoordinates, updateCurrentData, updateForecastData } from '../redux/actions'
+import doRequest from '../../services/request'
+import Autocomplete from './Autocomplete'
 
 const SearchCoordinateFormWrapper = styled.div`
   display: flex;
@@ -10,28 +12,53 @@ const SearchCoordinateFormWrapper = styled.div`
   justify-content: center;
 `
 
-const handleFormSubmit = e => {
-  e.preventDefault()
-  console.log(e)
+const getCoordinates = async props => {
+  const data = await doRequest(
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${props.address.description}&key=AIzaSyCvBITg5C4Q4yHpxYwBEk2qnmhmXOVtL5M`
+  )
+
+  if (data.status === 'OK') {
+    props.dispatch(
+      updateCoordinates(
+        data.results[0].geometry.location.lat,
+        data.results[0].geometry.location.lng
+      )
+    )
+    props.dispatch(updateCurrentData({}))
+    props.dispatch(updateForecastData({}))
+  } else alert('Google Maps API could not find any results.')
+
+  return data
 }
 
-const handleInputChange = (e, props) => {
-  console.log(props)
-  console.log(e.target)
-  props.dispatch(updateAddress(e.target.value))
+const handleFormSubmit = (e, props) => {
+  e.preventDefault()
+
+  getCoordinates(props)
+
+  const addressArray = localStorage.getItem('addresses')
+    ? JSON.parse(localStorage.getItem('addresses'))
+    : []
+
+  addressArray.push(props.address.description)
+
+  localStorage.setItem('addresses', JSON.stringify(addressArray))
 }
 
 const SearchCoordinateForm = props => {
-  console.log(props)
   return (
     <SearchCoordinateFormWrapper>
-      <form onSubmit={handleFormSubmit}>
-        <input
-        value={props.address.description}
-          onChange={e => {
-            handleInputChange(e, props)
-          }}
-        ></input>
+      <form
+        onSubmit={e => {
+          handleFormSubmit(e, props)
+        }}
+      >
+        <Autocomplete
+          suggestions={
+            localStorage.getItem('addresses') ? JSON.parse(localStorage.getItem('addresses')) : []
+          }
+          value={props.address.description}
+        />
         <button>Sent</button>
       </form>
     </SearchCoordinateFormWrapper>
@@ -41,7 +68,9 @@ const SearchCoordinateForm = props => {
 const mapStateToProps = state => {
   return {
     coordinates: state.coordinates,
-    address: state.address
+    address: state.address,
+    currentData: state.currentData,
+    forecastData: state.forecastData
   }
 }
 

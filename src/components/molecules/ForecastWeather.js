@@ -44,7 +44,7 @@ const ForecastWeather = props => {
       <div id="min">Min: {forecast.main.temp_min}</div>
       <div>Humidity: {forecast.main.humidity}</div>
       <div>{forecast.weather.length ? forecast.weather[0].description : ''}</div>
-      <img src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}></img>
+      <img src={`http://openweathermap.org/img/w/${forecast.weather[0].icon}.png`} alt="weather icon"></img>
     </ForecastWeatherBlock>
   ))
 }

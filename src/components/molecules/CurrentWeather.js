@@ -43,7 +43,7 @@ const CurrentWeather = props => {
       <div id="min">Min: {data.main.temp_min}</div>
       <div>Humidity: {data.main.humidity}</div>
       <div>{data.weather.length ? data.weather[0].description : ''}</div>
-      <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}></img>
+      <img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="weather icon"></img>
     </CurrentWeatherBlock>
   )
 }

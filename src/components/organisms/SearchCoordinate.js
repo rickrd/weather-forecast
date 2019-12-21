@@ -27,8 +27,9 @@ const getLocation = store => {
 
 const SearchCoordinate = props => {
   const { lat, lon } = props.coordinates
+  const { description } = props.address
 
-  if (lat === 0 || lon === 0) {
+  if (lat === 0 || (lon === 0 && description === '')) {
     getLocation(props)
   }
 
@@ -44,7 +45,8 @@ const mapStateToProps = state => {
   return {
     coordinates: state.coordinates,
     currentData: state.currentData,
-    forecastData: state.forecastData
+    forecastData: state.forecastData,
+    address: state.address
   }
 }
 

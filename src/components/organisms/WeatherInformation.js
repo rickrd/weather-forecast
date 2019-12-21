@@ -13,7 +13,7 @@ const WeatherInformationWrapper = styled.div`
   justify-content: center;
   width: 100%;
 
-  >h3 {
+  > h3 {
     border-bottom: 1px solid #fff;
   }
 `
@@ -33,13 +33,11 @@ const getForecastData = async props => {
     `https://api.openweathermap.org/data/2.5/forecast?lat=${props.coordinates.lat}&lon=${props.coordinates.lon}&units=metric&APPID=01460cb31eb2c443498031402b438f94`
   )
   props.dispatch(updateForecastData(data))
-  console.log(data)
+
   return data
 }
 
 const WeatherInformation = props => {
-  console.log(props)
-
   if (Object.keys(props.currentData.data).length === 0) {
     getCurrentData(props)
   }
