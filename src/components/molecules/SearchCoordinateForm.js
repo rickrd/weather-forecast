@@ -25,45 +25,75 @@ const SearchCoordinateFormWrapper = styled.div`
 `
 
 const getCoordinates = async props => {
-  const data = await doRequest(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${props.address.description}&key=AIzaSyCvBITg5C4Q4yHpxYwBEk2qnmhmXOVtL5M`
-  )
+  let addressFound = []
 
-  if (data.status === 'OK') {
-    props.dispatch(
-      updateCoordinates(
-        data.results[0].geometry.location.lat,
-        data.results[0].geometry.location.lng
-      )
+  const addressesArray = localStorage.getItem('addresses')
+    ? JSON.parse(localStorage.getItem('addresses'))
+    : []
+
+  if (addressesArray.length > 0) {
+    addressFound = addressesArray.filter(
+      address => address.description.toLowerCase() === props.address.description.toLowerCase()
     )
-    props.dispatch(updateCurrentData({}))
-    props.dispatch(updateForecastData({}))
-  } else alert('Google Maps API could not find any results.')
+  }
 
-  return data
+  if (Object.keys(addressFound).length === 0) {
+    const data = await doRequest(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${props.address.description}&key=AIzaSyCvBITg5C4Q4yHpxYwBEk2qnmhmXOVtL5M`
+    )
+
+    if (data.status === 'OK') {
+      props.dispatch(
+        updateCoordinates(
+          data.results[0].geometry.location.lat,
+          data.results[0].geometry.location.lng
+        )
+      )
+
+      props.dispatch(updateCurrentData({}))
+
+      props.dispatch(updateForecastData({}))
+
+      addressesArray.push({
+        description: props.address.description,
+        lat: data.results[0].geometry.location.lat,
+        lon: data.results[0].geometry.location.lng
+      })
+
+      localStorage.setItem('addresses', JSON.stringify(addressesArray))
+    } else alert('Google Maps API could not find any results.')
+  } else {
+    props.dispatch(updateCoordinates(addressFound[0].lat, addressFound[0].lon))
+
+    props.dispatch(updateCurrentData({}))
+    
+    props.dispatch(updateForecastData({}))
+  }
+
+  return null
 }
 
 const handleFormSubmit = (e, props) => {
   e.preventDefault()
 
-  getCoordinates(props)
+  let suggestionFound = []
 
-  let addressFound = []
-
-  const addressArray = localStorage.getItem('addresses')
-    ? JSON.parse(localStorage.getItem('addresses'))
+  const suggestionArray = localStorage.getItem('suggestions')
+    ? JSON.parse(localStorage.getItem('suggestions'))
     : []
 
-  if (addressArray.length > 0) {
-    addressFound = addressArray.filter(
-      address => address.toLowerCase() === props.address.description.toLowerCase()
+  if (suggestionArray.length > 0) {
+    suggestionFound = suggestionArray.filter(
+      suggestion => suggestion.toLowerCase() === props.address.description.toLowerCase()
     )
   }
 
-  if (addressFound.length === 0) {
-    addressArray.push(props.address.description)
-    localStorage.setItem('addresses', JSON.stringify(addressArray))
+  if (suggestionFound.length === 0) {
+    suggestionArray.push(props.address.description)
+    localStorage.setItem('suggestions', JSON.stringify(suggestionArray))
   }
+
+  getCoordinates(props)
 }
 
 const SearchCoordinateForm = props => {
@@ -76,7 +106,9 @@ const SearchCoordinateForm = props => {
       >
         <Autocomplete
           suggestions={
-            localStorage.getItem('addresses') ? JSON.parse(localStorage.getItem('addresses')) : []
+            localStorage.getItem('suggestions')
+              ? JSON.parse(localStorage.getItem('suggestions'))
+              : []
           }
         />
         <button>Send</button>
